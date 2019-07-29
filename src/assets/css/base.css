@@ -1,0 +1,19 @@
+html{
+    font-size: calc(16px + 2 * (100vw - 375px)/ 39);
+}
+body{
+    background-color: #f6f7f9;
+    font-family: sans-serif;
+    line-height: 1.5;
+    color: #33373d;
+    fill: currentColor;
+}
+blockquote, body, dd, dl, figure, form, h1, h2, h3, h4, h5, h6, ol, p, ul {
+    margin: 0;
+}
+a{
+    text-decoration: none;
+}
+ul,dl,ol{
+    list-style: none;
+}

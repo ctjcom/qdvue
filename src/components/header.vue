@@ -1,14 +1,18 @@
 <template>
     <div class="header">
-        <a href="#"><h1>起点中文网</h1></a>
+        <a class="logo-a" href="#"><h1 class="logo">起点中文网</h1></a>
         <div class="channel">
             <a href="#" class="man">男生</a>
             <a href="#" class="woman">女生</a>
         </div>
         <div class="header-right">
             <div class="span1">
-                <span></span>
-                <span></span>
+                <a href="#" class="icon">
+                    <span class="iconfont icon-yonghu"></span>
+                </a>
+                <a href="#" class="icon">
+                    <span class="iconfont icon-ziyuan"></span>
+                </a>
             </div>
             
         </div> 
@@ -25,12 +29,23 @@ export default {
 .header{
     display: flex;
     justify-content:space-between;
+    box-sizing: border-box;
+    height: 2.75rem;
+    padding-top: .6875rem;
+    padding-bottom: .625rem;
 }
-.header h1{
-    font-size: 24px;
-    color: #000;
-    margin: 0;
-    padding: 0;
+.header .logo-a{
+    width: 5.625rem;
+    padding: 0 1rem;
+}
+.header .logo{
+    font-size: 1rem;
+    width: inherit;
+    height: 1.125rem;
+    margin: auto;
+    color: transparent;
+    background: url('../../public/img/logo-qdm.02fc8.svg') no-repeat center;
+    background-size: 100%;
 }
 .header>.channel{
     display: flex;
@@ -38,23 +53,30 @@ export default {
 }
 .header>.channel>a{
      display: block;
-     border: 1px solid red;
+     font-size: .8125rem;
+     border: 1px solid #ed424b;
      text-decoration: none;
-     padding: 3px 10px;
+     line-height: 1.5rem;
+     padding: 0 .75rem;
 }
 .header>.channel>.man{
-    background: red;
+    background: #ed424b;
     color: #fff;
-    border-top-left-radius: 5px;
-    border-bottom-left-radius: 5px;
+    border-radius: 4px 0 0 4px;
 }
 .header>.channel>.woman{
     background:#fff;
-    color:red;
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
+    color:#ed424b;
+    border-radius: 0 4px 4px 0;
 }
-.header>.header-right>.span1>span{
-    color:red;
+.header>.header-right>.span1 .icon{
+    display: block;
+    width: 2.25rem;
+    height: 2.25rem;
+    color:#ed424b;
+}
+.header>.header-right>.span1{
+    display: flex;
+    justify-content: center;
 }
 </style>
