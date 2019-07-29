@@ -1,7 +1,18 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+      <header class="header">
+     <a href="#">
+       <h1>起点中文网</h1>
+     </a>
+     <dir>
+       <h3><a href="#">男生</a></h3>
+       <h3><a href="#">女生</a></h3>
+     </dir>
+     <div>
+       <span class="icon-yonghu"></span>
+       <span class="icon-ziyuan"></span>
+     </div>
+   </header>
   </div>
 </template>
 
@@ -16,3 +27,10 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+header{
+  display: flex;
+  justify-content: space-between;
+}
+</style>
