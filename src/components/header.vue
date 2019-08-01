@@ -7,9 +7,9 @@
         </div>
         <div class="header-right">
             <div class="span1">
-                <a href="#" class="icon">
+                <router-link to="/login" class="icon">
                     <span class="iconfont icon-yonghu"></span>
-                </a>
+                </router-link>
                 <a href="#" class="icon">
                     <span class="iconfont icon-ziyuan"></span>
                 </a>

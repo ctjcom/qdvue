@@ -3,31 +3,31 @@
     <ul class="nav-list">
       <li>
         <a href="#">
-          <p></p>
+          <p class="ioc iconfont icon-leimupinleifenleileibie" style="color:#0091de"></p>
           <span>分类</span>
         </a>
       </li>
       <li>
         <a href="#">
-          <p></p>
+          <p class="ioc iconfont icon-paixingbang" style="color:rgb(255, 113, 113)"></p>
           <span>排行榜</span>
         </a>
       </li>
       <li>
         <a href="#">
-          <p></p>
+          <p class="ioc iconfont icon-yezi" style="color:rgb(255, 149, 123)"></p>
           <span>免费</span>
         </a>
       </li>
       <li>
         <a href="#">
-          <p></p>
+          <p class="ioc iconfont icon-wanben" style="color:rgb(250, 179, 86)"></p>
           <span>完本</span>
         </a>
       </li>
       <li>
         <a href="#">
-          <p></p>
+          <p class="ioc iconfont icon-huangguan" style="color:rgb(216, 103, 245)"></p>
           <span>大神</span>
         </a>
       </li>
@@ -54,5 +54,8 @@ export default {};
   height: 3.625rem;
   text-align: center;
   color: initial;
+}
+.nav-list .ioc{
+  font-size:2.2rem;
 }
 </style>

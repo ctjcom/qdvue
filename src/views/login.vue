@@ -1,11 +1,11 @@
 <template>
   <div class="login" @click="hidelogin">
     <!--登录img-->
-    <a href="javascript:;">
+    <a href="javascript:;" v-show="islogo">
       <img class="top-img" src="../../public/img/top_red_13.png" alt />
     </a>
     <!--登录logo-->
-    <div class="logo-box">
+    <div class="logo-box" :style="logohide">
       <img class="logo-img" src="../../public/img/0.png" alt />
     </div>
     <div class="login-body">
@@ -15,13 +15,13 @@
           <li>
             <div>
               <span class="iconfont icon-yonghu"></span>
-              <input type="text" placeholder="请输入邮箱/个性账号" />
+              <input @focus="showlogo" type="text" placeholder="请输入邮箱/个性账号" />
             </div>
           </li>
           <li>
             <div>
               <span class="iconfont icon-suo"></span>
-              <input type="password" placeholder="请输入密码" />
+              <input @focus="showlogo" type="password" placeholder="请输入密码" />
             </div>
             <span class="iconfont icon-pwd-hidden"></span>
           </li>
@@ -89,24 +89,31 @@
 </template>
     
 <script>
-import { constants } from 'crypto';
+import { constants } from "crypto";
 export default {
   data() {
     return {
-      isShow: false
-    }
+      isShow: false,
+      islogo: true,
+      logohide:{
+         opacity:1
+      },
+    };
   },
   methods: {
-    showlogin(){
+    showlogo() {
+      this.islogo = false;
+      this.logohide.opacity=0;
+    },
+    showlogin() {
       this.isShow = true;
     },
-    hidelogin(e){
-      if(e.target.nodeName=="DIV"){
-        this.isShow=false;
-      } 
+    hidelogin(e) {
+      if (e.target.nodeName == "DIV") {
+        this.isShow = false;
+      }
     }
-  },
- 
+  }
 };
 </script>
 
@@ -152,7 +159,7 @@ export default {
   justify-content: space-between;
   align-items: center;
 }
-.login .login-from .from-list li span{
+.login .login-from .from-list li span {
   margin-right: 0.9rem;
 }
 .login .login-link {
