@@ -64,8 +64,6 @@ export default {};
   text-overflow: ellipsis;
   color: #969ba3;
 }
-.book-small {
-}
 .book-small span {
   font-size: 0.5rem;
   line-height: 1.5;
