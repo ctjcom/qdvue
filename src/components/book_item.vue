@@ -1,15 +1,28 @@
 <template>
   <div class="book">
-    <img class="book-img" src="../../public/img/150.jpg" alt />
+    <img class="book-img" :src="imgurl" alt />
     <div>
-      <p class="book-title">都市剑说</p>
-      <span class="book-writer">华表</span>
+      <p class="book-title">{{title}}</p>
+      <span class="book-writer">{{writer}}</span>
     </div>
   </div>
 </template>
 
 <script>
-export default {};
+import { constants } from 'crypto';
+export default {
+  props:{
+    title:{
+      default:'',
+    },
+    writer:{
+      default:'',
+    },
+    imgurl:{
+      default:'',
+    }
+  },
+};
 </script>
 
 <style scoped>

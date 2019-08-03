@@ -8,10 +8,10 @@
         <div class="header-right">
             <div class="span1">
                 <router-link to="/login" class="icon">
-                    <span class="iconfont icon-yonghu"></span>
+                    <span class="ico iconfont icon-yonghu"></span>
                 </router-link>
                 <a href="#" class="icon">
-                    <span class="iconfont icon-ziyuan"></span>
+                    <span class="ico iconfont icon-ziyuan"></span>
                 </a>
             </div>
             
@@ -74,6 +74,9 @@ export default {
     width: 2.25rem;
     height: 2.25rem;
     color:#ed424b;
+}
+.header>.header-right>.span1 .icon>.ico{
+    font-size: 1rem;
 }
 .header>.header-right>.span1{
     display: flex;

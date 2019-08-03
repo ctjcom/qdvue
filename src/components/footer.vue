@@ -52,7 +52,7 @@ footer > .footer-backtop a {
 }
 footer > .footer-link {
   font-size: 0.875rem;
-  display: box;
+  display: flexbox;
   display: -webkit-box;
   padding: 0.5625rem 1.1875rem 0;
   text-align: center;
