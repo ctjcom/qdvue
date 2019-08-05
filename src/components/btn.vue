@@ -1,15 +1,23 @@
 <template>
     <div>
     <a href="#" class="btn">
-      <span class="iconfont icon-fangdajing"></span>
+      <span :class="spanClass"></span>
         {{btnText}}
     </a>
     </div>
 </template>
 
 <script>
+import { constants } from 'crypto';
 export default {
-    
+    props:{
+      btnText:{
+        default:'',
+      },
+      spanClass:{
+        default:'',
+      }
+    }
 }
 </script>
 
