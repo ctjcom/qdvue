@@ -33,6 +33,8 @@
         </mt-swipe-item>
       </mt-swipe>
     </div>
+    <!--搜索按钮-->
+    
     <navList></navList>
     <boxTitle title="热门小说" desc="起点编辑推荐"></boxTitle>
     <bookSolidList></bookSolidList>
@@ -69,19 +71,19 @@ export default {
   box-sizing: border-box;
   padding: 0 0.75rem;
   overflow: hidden;
-  width:100%;
-  height:calc(.314 * (100vw - 1.5rem));
+  width: 100%;
+  height: calc(0.314 * (100vw - 1.5rem));
 }
 .swipe-img {
   width: 100%;
   height: calc(100% + 25.1897%);
 }
 /*重写mintui样式*/
-#swipe >>> .mint-swipe-indicator{
+#swipe >>> .mint-swipe-indicator {
   background: #fff;
   opacity: 1;
 }
-#swipe >>> .mint-swipe-indicator.is-active{
+#swipe >>> .mint-swipe-indicator.is-active {
   background: red;
 }
 </style>
