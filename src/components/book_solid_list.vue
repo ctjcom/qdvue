@@ -8,22 +8,18 @@
       @touchmove="move"
       @touchend="end"
     >
-      <bookItem title="都市剑说" writer="华表" :imgurl="require(`../../public/img/150.jpg`)"></bookItem>
-      <bookItem title="万古最强部落" writer="山人有妙计" :imgurl="require(`../../public/img/150 (1).jpg`)"></bookItem>
-      <bookItem title="我是勤行第一人" writer="光暗之心" :imgurl="require(`../../public/img/150 (2).jpg`)"></bookItem>
-      <bookItem title="超神星卡师" writer="沉砚" :imgurl="require(`../../public/img/150 (3).jpg`)"></bookItem>
-      <bookItem title="暗影熊提伯斯的位面之旅" writer="暗影熊" :imgurl="require(`../../public/img/150 (4).jpg`)"></bookItem>
-      <bookItem title="我师叔是林正英" writer="白袍飞扬" :imgurl="require(`../../public/img/150 (5).jpg`)"></bookItem>
-      <bookItem title="我能点化万物" writer="锈迹符文" :imgurl="require(`../../public/img/150 (6).jpg`)"></bookItem>
+    <bookItem v-for="(item,i) of list" :key="i" :title="item.name" :writer="item.author" :imgurl="item.images" :id="item.id"></bookItem>
     </div>
   </div>
 </template>
 
 <script>
 import bookItem from "./book_item";
+import { constants } from 'crypto';
 export default {
   data() {
     return {
+      list:[],//保存书籍的数组
       listStyle: {
         marginLeft: 0
       },
@@ -36,6 +32,16 @@ export default {
       marginLeft: 0, //记录位移距离
       maxLeft: 0 //最大位移
     };
+  },
+  props:{type:{
+    default:"",
+  }},
+  created(){
+    console.log(this.type)
+    this.axios.get("/type",{params:{type:this.type}}).then(res=>{
+      this.list=res.data.slice(0,6);
+      console.log(this.list)
+    })
   },
   methods: {
     start(e) {

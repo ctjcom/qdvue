@@ -37,7 +37,7 @@
     
     <navList></navList>
     <boxTitle title="热门小说" desc="起点编辑推荐"></boxTitle>
-    <bookSolidList></bookSolidList>
+    <bookSolidList :type="`玄幻`"></bookSolidList>
     <boxTitle title="新书抢先" desc="24小时热销新书"></boxTitle>
     <bookListItem></bookListItem>
 

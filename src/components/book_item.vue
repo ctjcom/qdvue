@@ -1,15 +1,18 @@
 <template>
   <div class="book">
+    <router-link tag="span" :to="`/details/`+id">
     <img class="book-img" :src="imgurl" alt />
     <div>
       <p class="book-title">{{title}}</p>
       <span class="book-writer">{{writer}}</span>
     </div>
+    </router-link>
   </div>
 </template>
 
 <script>
 import { constants } from 'crypto';
+import { deflate } from 'zlib';
 export default {
   props:{
     title:{
@@ -20,6 +23,9 @@ export default {
     },
     imgurl:{
       default:'',
+    },
+    id:{
+      default:''
     }
   },
 };

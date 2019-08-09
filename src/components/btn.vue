@@ -1,7 +1,7 @@
 <template>
     <div>
     <a href="#" class="btn">
-      <span class="iconfont icon-fangdajing"></span>
+      <span :class="icon"></span>
         {{btnText}}
     </a>
     </div>
@@ -9,7 +9,14 @@
 
 <script>
 export default {
-    
+  props:{
+    btnText:{
+      default:'',
+    },
+    icon:{
+      default:'',
+    }
+  } 
 }
 </script>
 
