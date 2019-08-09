@@ -34,7 +34,7 @@
       </mt-swipe>
     </div>
     <!--搜索按钮-->
-    
+    <btn btnText="九星毒奶" spanClass="iconfont icon-fangdajing"></btn>
     <navList></navList>
     <boxTitle title="热门小说" desc="起点编辑推荐"></boxTitle>
     <bookSolidList :type="`玄幻`"></bookSolidList>
@@ -53,6 +53,7 @@ import bookSolidList from "../components/book_solid_list";
 import bookListItem from "../components/book_list_item";
 import navList from "../components/nav_list";
 import boxTitle from "../components/box_title";
+import btn from "../components/btn";
 export default {
   name: "home",
   components: {
@@ -61,7 +62,8 @@ export default {
     bookSolidList,
     bookListItem,
     navList,
-    boxTitle
+    boxTitle,
+    btn
   }
 };
 </script>

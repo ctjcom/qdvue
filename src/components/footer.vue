@@ -17,7 +17,7 @@
       <a href="#" class="footer-app">
         <div class="app-logo">
           <img src="../../public/img/0.png" alt />
-          <div>
+          <div class="app-text">
             <h3>安装起点读书客户端</h3>
             <p>看更多正版好书</p>
           </div>
@@ -52,7 +52,7 @@ footer > .footer-backtop a {
 }
 footer > .footer-link {
   font-size: 0.875rem;
-  display: flexbox;
+  display: flex;
   display: -webkit-box;
   padding: 0.5625rem 1.1875rem 0;
   text-align: center;
@@ -107,6 +107,10 @@ footer > .footer-app span {
   color: #fff;
   border-radius: 99px;
   background-color: #ed424b;
+}
+.app-text{
+  margin-left:0.815rem;
+  text-align: left;
 }
 </style>
 
