@@ -1,6 +1,6 @@
 <template>
   <div class="details">
-    <Header></Header>
+    <Head></Head>
     <!--书籍详情-->
     <div class="book-details">
       <img class="book-cover" src="../../public/img/150 (1).jpg" alt />
@@ -22,7 +22,7 @@
     </div>
     <!--按钮组-->
     <div class="btn-group">
-      <a class="btn warp" href="#">免费试读</a>
+      <router-link to="/read" class="btn warp">免费试读</router-link>
       <a class="btn" href="#">加入书架</a>
       <a class="btn" href="#">VIP订阅</a>
     </div>
@@ -41,14 +41,14 @@
       后现代主义电影教父？那是什么鬼......
     </div>
     <!--书籍目录-->
-    <div></div>
+    <a href class="book-meta book-status">查看完整目录</a>
 
     <Footer></Footer>
   </div>
 </template>
 
 <script>
-import Header from "../components/header";
+import Head from "../components/head" 
 import Footer from "../components/footer";
 
 export default {
@@ -56,7 +56,7 @@ export default {
     console.log(this.$route.params.id);
   },
   components: {
-    Header,
+    Head,
     Footer
   }
 };
@@ -66,6 +66,7 @@ export default {
 .book-details {
   display: flex;
   padding: 1rem;
+  background-color: #f6f7f9;
 }
 .book-cover {
   width: 5.25rem;
@@ -146,5 +147,14 @@ export default {
   border-bottom: 1rem solid transparent;
   box-shadow: 0 1px #f0f1f2, 0 -1px #f0f1f2;
   fill: currentColor;
+}
+.book-status {
+  background: #fff;
+  color: #33373d;
+  line-height: 2.55rem;
+  font-size: .9rem;
+  display: flex;
+  justify-content: center;
+  padding: 0 1rem;
 }
 </style>
