@@ -14,6 +14,17 @@
     <div class="read-menu"></div>
     <!--底部设置。。。-->
     <div class="read-foot">
+      <!--设置面板-->
+    <div class="set">
+      <!--字体设置-->
+      <div class="font-set">
+        
+      </div>
+      <!--背景设置-->
+      <div class="bg-set">
+
+      </div>
+    </div>
       <a href="#">
         <span>1</span>
         <h3>目录</h3>
@@ -31,6 +42,7 @@
         <h3>夜间</h3>
       </a>
     </div>
+    
   </div>
 </template>
 
