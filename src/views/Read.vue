@@ -69,7 +69,7 @@ export default {
   created() {
     //初始化设置参数
     var set=localStorage.getItem("set")
-    console.log(set)
+  
     
     this.set = this.$store.getters.getset;
     this.getbook();
