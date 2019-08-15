@@ -1,15 +1,13 @@
 <template>
-  <div class="read" :style="{'background-color':bgList[bgid]}">
+  <div class="read" :style="{'background-color':bgList[set.bgid]}">
     <!--顶部导航栏-->
     <Head v-show="istab"></Head>
     <!--内容-->
-    <div class="read-content" :style="{'font-size':rangeValue+'px','color':textcolor}" @click="istab=!istab">
-      测试数据！！测试数据测试数据！！测试数据测试数据！！测试数据测试数据！！测试数据测试数据！！测试数据测试数据！！测试数据测试数据！！测试数据测试数据！！测试数据测试数据！！测试数据测试数据！！测试数据测试数据！！测试数据测试数据！！测试数据测试数据！！测试数据测试数据！！测试数据测试数据！！测试数据测试数据！！测试数据测试数据！！测试数据测试数据！！测试数据测试数据！！测试数据测试数据！！测试数据测试数据！！测试数据测试数据！！测试数据测试数据！！测试数据测试数据！！测试数据
-      测试数据！！测试数据测试数据！！测试数据测试数据！！测试数据测试数据！！测试数据测试数据！！测试数据测试数据！！测试数据测试数据！！测试数据测试数据！！测试数据测试数据！！测试数据测试数据！！测试数据测试数据！！测试数据测试数据！！测试数据测试数据！！测试数据测试数据！！测试数据测试数据！！测试数据测试数据！！测试数据测试数据！！测试数据测试数据！！测试数据测试数据！！测试数据测试数据！！测试数据测试数据！！测试数据测试数据！！测试数据测试数据！！测试数据测试数据！！测试数据
-      测试数据！！测试数据测试数据！！测试数据测试数据！！测试数据测试数据！！测试数据测试数据！！测试数据测试数据！！测试数据测试数据！！测试数据测试数据！！测试数据测试数据！！测试数据测试数据！！测试数据测试数据！！测试数据测试数据！！测试数据测试数据！！测试数据测试数据！！测试数据测试数据！！测试数据测试数据！！测试数据测试数据！！测试数据测试数据！！测试数据测试数据！！测试数据测试数据！！测试数据测试数据！！测试数据测试数据！！测试数据测试数据！！测试数据测试数据！！测试数据
-      测试数据！！测试数据测试数据！！测试数据测试数据！！测试数据测试数据！！测试数据测试数据！！测试数据测试数据！！测试数据测试数据！！测试数据测试数据！！测试数据测试数据！！测试数据测试数据！！测试数据测试数据！！测试数据测试数据！！测试数据测试数据！！测试数据测试数据！！测试数据测试数据！！测试数据测试数据！！测试数据测试数据！！测试数据测试数据！！测试数据测试数据！！测试数据测试数据！！测试数据测试数据！！测试数据测试数据！！测试数据测试数据！！测试数据测试数据！！测试数据
-      测试数据！！测试数据测试数据！！测试数据测试数据！！测试数据测试数据！！测试数据测试数据！！测试数据测试数据！！测试数据测试数据！！测试数据测试数据！！测试数据测试数据！！测试数据测试数据！！测试数据测试数据！！测试数据测试数据！！测试数据测试数据！！测试数据测试数据！！测试数据测试数据！！测试数据测试数据！！测试数据测试数据！！测试数据测试数据！！测试数据测试数据！！测试数据测试数据！！测试数据测试数据！！测试数据测试数据！！测试数据测试数据！！测试数据测试数据！！测试数据
-    </div>
+    <div
+      class="read-content"
+      :style="{'font-size':set.rangeValue+'px','color':set.textcolor}"
+      @click="istab=!istab"
+    >{{book.content}}</div>
     <!--目录-->
     <div class="read-menu"></div>
     <!--底部设置。。。-->
@@ -19,16 +17,18 @@
         <!--字体设置-->
         <div class="font-set">
           <div class="btnrem" @click="setfont(-2)">A -</div>
-          <mt-range v-model="rangeValue" :min="12" :max="26" :step="2"></mt-range>
+          <mt-range v-model="set.rangeValue" :min="12" :max="26" :step="2"></mt-range>
           <div class="btnadd" @click="setfont(2)">A +</div>
         </div>
         <!--背景设置-->
+        <div class="line"></div>
         <ul class="bg-set" @click="bgset">
-          <li :class="active[0]" data-id="0" :style="{'background-color':bgList[0]}"></li>
-          <li :class="active[1]" data-id="1" :style="{'background-color':bgList[1]}"></li>
-          <li :class="active[2]" data-id="2" :style="{'background-color':bgList[2]}"></li>
-          <li :class="active[3]" data-id="3" :style="{'background-color':bgList[3]}"></li>
+          <li :class="set.active[0]" data-id="0" :style="{'background-color':bgList[0]}"></li>
+          <li :class="set.active[1]" data-id="1" :style="{'background-color':bgList[1]}"></li>
+          <li :class="set.active[2]" data-id="2" :style="{'background-color':bgList[2]}"></li>
+          <li :class="set.active[3]" data-id="3" :style="{'background-color':bgList[3]}"></li>
         </ul>
+        <div class="line"></div>
       </div>
       <div class="foot-bar">
         <a href="javascript:;">
@@ -45,7 +45,7 @@
         </a>
         <a href="javascript:;" @click="tab">
           <span>4</span>
-          <h3>{{tabtext}}</h3>
+          <h3>{{set.tabtext}}</h3>
         </a>
       </div>
     </div>
@@ -58,54 +58,74 @@ import { constants } from "crypto";
 export default {
   data() {
     return {
-      rangeValue: 16, //字体大小
-      bgList: ["#c4b395", "#c3d4e6", "#c8e8c8", "#fff","#000"], //背景列表
-      bgid: 0, //背景选择
-      bid:0,//保存当前所选的背景
-      active: [],//激活样式
-      textcolor:"#33373d",//文本的字体颜色
-      showtab:true,//日夜切换
-      tabtext:"夜间",
-      isset:false,//控制设置面板显示隐藏
-      istab:false,//控制上下导航显示隐藏
+      set: {}, //设置对象
+      bgList: ["#c4b395", "#c3d4e6", "#c8e8c8", "#fff", "#000"], //背景列表
+      isset: false, //控制设置面板显示隐藏
+      istab: false, //控制上下导航显示隐藏
+      book: {},
+      id: 1
     };
   },
+  created() {
+    //初始化设置参数
+    var set=localStorage.getItem("set")
+    console.log(set)
+    
+    this.set = this.$store.getters.getset;
+    this.getbook();
+  },
   methods: {
-
-  
-    tab(){
-        if(this.showtab){
-          this.textcolor="#ccc";
-          this.bgid=4;
-          this.tabtext="日间";
-          this.showtab=false;
-        }else{
-          this.textcolor="#33373d";
-          this.bgid=this.bid;
-          this.tabtext="夜间";
-          this.showtab=true;
-        }
+    getbook() {
+      //获取书籍内容
+      this.axios
+        .get("/book", {
+          params: {
+            book: this.$route.params.id,
+            id: this.id
+          }
+        })
+        .then(res => {
+          this.book = res.data;
+        });
+    },
+    tab() {
+      //日夜模式切换
+      if (this.set.showtab) {
+        this.$store.commit("settextcolor", "#ccc");
+        this.$store.commit("setbgid", 4);
+        this.$store.commit("settabtext", "日间");
+        this.$store.commit("setshowtab", false);
+      } else {
+        //日间模式
+        this.$store.commit("settextcolor", "#33373d");
+        //将背景切换为用户之前设置的背景
+        this.$store.commit("setbgid", this.set.bid);
+        this.$store.commit("settabtext", "夜间");
+        this.$store.commit("setshowtab", true);
+      }
     },
     bgset(e) {
       if (e.target.nodeName == "LI") {
-        this.textcolor="#33373d";
-        this.bgid = e.target.dataset.id;
-        this.bid = e.target.dataset.id;
-        this.active = [];//先清空数组
-        this.active[this.bgid] = "bg-active";
+        this.$store.commit("settextcolor", "#33373d");
+        var id = e.target.dataset.id;
+        this.$store.commit("setbid", id);
+        this.$store.commit("setbgid", id);
+        var active = [];
+        active[id] = "bg-active";
+        this.$store.commit("setactive", active);
       }
     },
     setfont(i) {
       if (i > 0) {
-        this.rangeValue += i;
+        this.set.rangeValue += i;
       } else {
-        this.rangeValue += i;
+        this.set.rangeValue += i;
       }
-      if (this.rangeValue < 12) {
-        this.rangeValue = 12;
+      if (this.set.rangeValue < 12) {
+        this.set.rangeValue = 12;
       }
-      if (this.rangeValue > 26) {
-        this.rangeValue = 26;
+      if (this.set.rangeValue > 26) {
+        this.set.rangeValue = 26;
       }
     }
   },
@@ -192,8 +212,6 @@ export default {
   box-sizing: border-box;
   padding: 1rem;
   width: 100%;
-  border-top: 1px solid #ccc;
-  border-bottom: 1px solid #ccc;
 }
 .bg-set > li {
   width: 20%;
@@ -203,5 +221,11 @@ export default {
 }
 .bg-set .bg-active {
   border: 1px solid red;
+}
+/*0.5px水平线*/
+.line {
+  width: 100%;
+  border-top: 1px solid #ccc;
+  transform: scale(1, 0.5);
 }
 </style>

@@ -3,42 +3,32 @@
     <Head></Head>
     <!--书籍详情-->
     <div class="book-details">
-      <img class="book-cover" src="../../public/img/150 (1).jpg" alt />
+      <img class="book-cover" :src="book.images" alt />
       <div class="book-body">
-        <h2 class="book-title">全知全能者</h2>
+        <h2 class="book-title">{{book.name}}</h2>
         <div class="book-rand">
-          <a href>李仲道</a>
+          <a href>{{book.author}}</a>
           <span class="tag-solid">大神</span>
         </div>
         <div class="book-score">
-          <span class="gray">8.5分</span>
+          <span class="gray">{{book.ratings}}分</span>
         </div>
-        <p class="book-meta">都市</p>
+        <p class="book-meta">{{book.type}}</p>
         <p class="book-meta">
-          196.57万字
-          <span></span>连载
+          {{book.wordcount}}万字
+          <span></span>{{book.serialize}}
         </p>
       </div>
     </div>
     <!--按钮组-->
     <div class="btn-group">
-      <router-link to="/read" class="btn warp">免费试读</router-link>
+      <router-link :to="'/read/'+book.id" class="btn warp">免费试读</router-link>
       <a class="btn" href="#">加入书架</a>
       <a class="btn" href="#">VIP订阅</a>
     </div>
     <!--书籍简介-->
     <div class="bookSummary">
-      来到平行世界的方别只想过普通的生活。
-      直到他相亲第五十次失败的那一天，他捡到了一个女高中生。
-      身为逃家富二代的她梦想成为大明星。
-      于是方别陪着她来到了横店。
-      原本他只想随意整两部烂片打破她的明星梦，好让她回去继承亿万家产，自己也能跟着混口饭吃。
-      直到他发现......
-      门口美甲店的老板说他叫吉良吉影。
-      横店巡逻的那个有着演员梦想的小片警，他的名字是陈永仁，他还有个哥们，名字叫刘建明。
-      那个被大小姐她爹派来暗中保护她的保镖，名字叫燕双鹰......
-      然后......方别火了。
-      后现代主义电影教父？那是什么鬼......
+      {{book.intro}}
     </div>
     <!--书籍目录-->
     <a href class="book-meta book-status">查看完整目录</a>
@@ -52,8 +42,15 @@ import Head from "../components/head"
 import Footer from "../components/footer";
 
 export default {
+  data(){
+    return{
+      book:{},
+    }
+  },
   created() {
-    console.log(this.$route.params.id);
+    this.axios.get("/booklist",{params:{id:this.$route.params.id}}).then(res=>{
+      this.book=res.data;
+    })
   },
   components: {
     Head,

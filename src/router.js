@@ -15,6 +15,6 @@ export default new Router({
     },
     {path:'/login',component:Login},
     {path:'/details/:id',name:'details',component:Details},
-    {path:'/Read',name:'read',component:Read},
+    {path:'/Read/:id',name:'read',component:Read},
   ]
 })
