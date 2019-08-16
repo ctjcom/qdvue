@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
+
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -13,11 +14,16 @@ export default new Vuex.Store({
       textcolor:"#33373d",//字体颜色
       tabtext:"夜间",//日夜切换开关的文本内容
       active:["bg-active"],//激活样式
+      bookid: 1,//阅读记录
     }
   },
   mutations: {
     setset(state,set){
         state.set=set;
+    },
+    setbookid(state,id){
+      state.set.bookid=id;
+      localStorage.set=JSON.stringify(state.set);
     },
     setbid(state,bid){
       state.set.bid=bid;
@@ -53,6 +59,9 @@ export default new Vuex.Store({
       getset(state){
         return state.set;
       },
+      getbookid(state){
+        return state.set.bookid;
+      }
   },
   actions: {
 

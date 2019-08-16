@@ -1,13 +1,22 @@
 <template>
   <div class="read" :style="{'background-color':bgList[set.bgid]}">
+     
     <!--顶部导航栏-->
     <Head v-show="istab"></Head>
     <!--内容-->
-    <div
-      class="read-content"
-      :style="{'font-size':set.rangeValue+'px','color':set.textcolor}"
-      @click="istab=!istab"
-    >{{book.content}}</div>
+   <mt-loadmore
+      :top-method="loadTop"
+      :bottom-method="loadBottom"
+      :bottom-all-loaded="allLoaded"
+      ref="loadmore"
+    >
+      <div
+        class="read-content"
+        :style="{'font-size':set.rangeValue+'px','color':set.textcolor}"
+        @click="istab=!istab"
+      >{{book.content}}</div>
+    </mt-loadmore>
+
     <!--目录-->
     <div class="read-menu"></div>
     <!--底部设置。。。-->
@@ -49,6 +58,7 @@
         </a>
       </div>
     </div>
+    
   </div>
 </template>
 
@@ -63,24 +73,42 @@ export default {
       isset: false, //控制设置面板显示隐藏
       istab: false, //控制上下导航显示隐藏
       book: {},
-      id: 1
+      allLoaded:false,
+      topStatus: '',
     };
   },
   created() {
     //初始化设置参数
-    var set=JSON.parse(localStorage.set);
-    this.$store.commit("setset",set);
+    var set = JSON.parse(localStorage.set);
+    this.$store.commit("setset", set);
     this.set = this.$store.getters.getset;
-    this.getbook();
+    var id=this.$store.getters.getbookid
+    this.getbook(id);
   },
   methods: {
-    getbook() {
+   
+    loadTop() {
+      //下拉刷新
+      console.log(2)
+      this.$refs.loadmore.onTopLoaded();
+    },
+    loadBottom() {
+      //上拉刷新加载下一章
+      console.log(1)
+      var id=this.$store.getters.getbookid;
+      id++;
+      this.$store.commit("setbookid",id);
+      this.getbook(id);
+     // this.allLoaded = true; // 若数据已全部获取完毕
+      this.$refs.loadmore.onBottomLoaded();
+    },
+    getbook(id) {
       //获取书籍内容
       this.axios
         .get("/book", {
           params: {
             book: this.$route.params.id,
-            id: this.id
+            id: id,
           }
         })
         .then(res => {
@@ -115,12 +143,12 @@ export default {
       }
     },
     setfont(i) {
-      this.$store.commit("setrangeValue",this.set.rangeValue += i);
+      this.$store.commit("setrangeValue", (this.set.rangeValue += i));
       if (this.set.rangeValue < 12) {
-        this.$store.commit("setrangeValue",12);
+        this.$store.commit("setrangeValue", 12);
       }
       if (this.set.rangeValue > 26) {
-        this.$store.commit("setrangeValue",26);
+        this.$store.commit("setrangeValue", 26);
       }
     }
   },
