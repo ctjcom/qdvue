@@ -68,9 +68,8 @@ export default {
   },
   created() {
     //初始化设置参数
-    var set=localStorage.getItem("set")
-  
-    
+    var set=JSON.parse(localStorage.set);
+    this.$store.commit("setset",set);
     this.set = this.$store.getters.getset;
     this.getbook();
   },
@@ -116,16 +115,12 @@ export default {
       }
     },
     setfont(i) {
-      if (i > 0) {
-        this.set.rangeValue += i;
-      } else {
-        this.set.rangeValue += i;
-      }
+      this.$store.commit("setrangeValue",this.set.rangeValue += i);
       if (this.set.rangeValue < 12) {
-        this.set.rangeValue = 12;
+        this.$store.commit("setrangeValue",12);
       }
       if (this.set.rangeValue > 26) {
-        this.set.rangeValue = 26;
+        this.$store.commit("setrangeValue",26);
       }
     }
   },

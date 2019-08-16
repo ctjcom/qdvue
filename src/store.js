@@ -21,32 +21,32 @@ export default new Vuex.Store({
     },
     setbid(state,bid){
       state.set.bid=bid;
-      //将设置信息保存在本地中
-      localStorage.set=state.set;
+      //将设置信息保存在本地中 
+      localStorage.set=JSON.stringify(state.set);
     },
     setshowtab(state,showtab){
       state.set.showtab=showtab;
-      localStorage.set=state.set;
+      localStorage.set=JSON.stringify(state.set);
     },
     setrangeValue(state,rangeValue){
       state.set.rangeValue=rangeValue;
-      localStorage.set=state.set;
+      localStorage.set=JSON.stringify(state.set);
     },
     setbgid(state,bgid){
       state.set.bgid=bgid;
-      localStorage.set=state.set;
+      localStorage.set=JSON.stringify(state.set);
     },
     settextcolor(state,textcolor){
       state.set.textcolor=textcolor;
-      localStorage.set=state.set;
+      localStorage.set=JSON.stringify(state.set);
     },
     settabtext(state,tabtext){
       state.set.tabtext=tabtext;
-      localStorage.set=state.set;
+      localStorage.set=JSON.stringify(state.set);
     },
     setactive(state,active){
       state.set.active=active;
-      localStorage.set=state.set;
+      localStorage.set=JSON.stringify(state.set);
     },
   },
   getters:{
