@@ -1,22 +1,30 @@
 <template>
-  <div class="read" :style="{'background-color':bgList[set.bgid]}">
-     
+  <div
+    class="read"
+    :style="{'background-color':bgList[set.bgid],'height':'100%'}"
+  >
     <!--顶部导航栏-->
     <Head v-show="istab"></Head>
     <!--内容-->
-   <mt-loadmore
+    <div ref="wrapper" :style="{ height:wrapperHeight+'px'}">
+    <mt-loadmore
       :top-method="loadTop"
       :bottom-method="loadBottom"
       :bottom-all-loaded="allLoaded"
       ref="loadmore"
+      :autoFill="isAutoFill"
     >
       <div
         class="read-content"
         :style="{'font-size':set.rangeValue+'px','color':set.textcolor}"
         @click="istab=!istab"
-      >{{book.content}}</div>
-    </mt-loadmore>
+        v-for="(item,i) of book" :key="i"
 
+      >
+      <h3>{{item.title}}</h3>
+      {{item.content}}</div>
+    </mt-loadmore>
+    </div>
     <!--目录-->
     <div class="read-menu"></div>
     <!--底部设置。。。-->
@@ -58,7 +66,6 @@
         </a>
       </div>
     </div>
-    
   </div>
 </template>
 
@@ -72,9 +79,12 @@ export default {
       bgList: ["#c4b395", "#c3d4e6", "#c8e8c8", "#fff", "#000"], //背景列表
       isset: false, //控制设置面板显示隐藏
       istab: false, //控制上下导航显示隐藏
-      book: {},
-      allLoaded:false,
-      topStatus: '',
+      book: [],
+      allLoaded: false,
+      topStatus: "",
+      isAutoFill: false,
+      wrapperHeight:0,
+      id:1,
     };
   },
   created() {
@@ -82,37 +92,39 @@ export default {
     var set = JSON.parse(localStorage.set);
     this.$store.commit("setset", set);
     this.set = this.$store.getters.getset;
-    var id=this.$store.getters.getbookid
-    this.getbook(id);
+    this.getbook(this.id);
+  },
+  mounted() {
+    //设置上拉刷新父容器高度
+    
+    this.wrapperHeight =
+      document.documentElement.clientHeight
   },
   methods: {
-   
     loadTop() {
       //下拉刷新
-      console.log(2)
+      console.log(2);
       this.$refs.loadmore.onTopLoaded();
     },
     loadBottom() {
       //上拉刷新加载下一章
-      console.log(1)
-      var id=this.$store.getters.getbookid;
-      id++;
-      this.$store.commit("setbookid",id);
-      this.getbook(id);
-     // this.allLoaded = true; // 若数据已全部获取完毕
+      this.id+=1
+      this.getbook(this.id);
+      //this.allLoaded = true; // 若数据已全部获取完毕
       this.$refs.loadmore.onBottomLoaded();
     },
     getbook(id) {
       //获取书籍内容
+      var id = id || 1;
       this.axios
         .get("/book", {
           params: {
             book: this.$route.params.id,
-            id: id,
+            id: id
           }
         })
         .then(res => {
-          this.book = res.data;
+          this.book.push(res.data)
         });
     },
     tab() {
@@ -161,6 +173,7 @@ export default {
 <style scoped>
 .read {
   background-color: #c4b395;
+  overflow: scroll;
 }
 .head {
   background-color: rgba(0, 0, 0, 0.9);
@@ -174,7 +187,8 @@ export default {
   color: #fff;
 }
 .read-content {
-  padding: 0 0.75rem;
+  padding:0.75rem;
+  background-color: transparent;
 }
 .read-foot {
   left: 0;
