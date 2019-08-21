@@ -49,7 +49,8 @@
       </div>
       <div class="foot-bar">
         <a href="javascript:;">
-          <span>1</span>
+          <span class="iconfont icon-gengduo
+"></span>
           <h3>目录</h3>
         </a>
         <a href="javascript:;">
