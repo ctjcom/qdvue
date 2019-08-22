@@ -2,7 +2,7 @@
   <div class="head">
     <!--公共头部-->
     <div class="head-left">
-      <a href>
+      <a href="javascript:;" @click="gopage">
         <span class="icon iconfont icon-jiankuohaoxizuo"></span>
       </a>
       <h3 class="head-title">{{title}}</h3>
@@ -20,6 +20,11 @@ export default {
        return{
 
        }
+    },
+    methods:{
+      gopage(){
+        this.$router.go(-1);
+      }
     },
     props:{
         title:{

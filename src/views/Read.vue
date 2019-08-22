@@ -26,7 +26,18 @@
     </mt-loadmore>
     </div>
     <!--目录-->
-    <div class="read-menu"></div>
+    <div class="read-menu" :class="{'menu-active':ismenu}" @click="hidemenu">
+      <!--目录列表-->
+      <div class="menu-body">
+          <h3 class="menu-title">目录</h3>
+          <div class="menu-list">
+          <a href="javascript:;" class="menu-item" v-for="(item,i) of menu" :key="i" @click="menubook(i)">
+            <span>{{item}}</span>
+            <span class="iconfont icon-jiankuohaoxiyou"></span>
+          </a>
+          </div>
+      </div>
+    </div>
     <!--底部设置。。。-->
     <div class="read-foot" v-show="istab">
       <!--设置面板-->
@@ -48,7 +59,7 @@
         <div class="line"></div>
       </div>
       <div class="foot-bar">
-        <a href="javascript:;">
+        <a href="javascript:;" @click="showmenu">
           <span class="iconfont icon-mulu"></span>
           <h3>目录</h3>
         </a>
@@ -57,12 +68,12 @@
           <h3>进度</h3>
         </a>
         <a href="javascript:;" @click="isset=!isset">
-          <span>3</span>
+          <span class="iconfont icon-shezhi-copy"></span>
           <h3>设置</h3>
         </a>
         <a href="javascript:;" @click="tab">
-          <span class="iconfont icon-icon-test" v-show="set.showtab"></span>
-          <span class="iconfont icon-session_evning" v-show="!set.showtab"></span>
+          <span class="iconfont icon-icon-test" v-show="!set.showtab"></span>
+          <span class="iconfont icon-session_evning" v-show="set.showtab"></span>
           <h3>{{set.tabtext}}</h3>
         </a>
       </div>
@@ -76,6 +87,8 @@ import { constants } from "crypto";
 export default {
   data() {
     return {
+      menu:[],//目录列表
+      ismenu:false,
       set: {}, //设置对象
       bgList: ["#c4b395", "#c3d4e6", "#c8e8c8", "#fff", "#000"], //背景列表
       isset: false, //控制设置面板显示隐藏
@@ -91,8 +104,10 @@ export default {
   created() {
     //初始化设置参数
     this.set = this.$store.getters.getset;
+    //获取书籍内容
     this.getbook(this.id);
-    console.log("1:"+this.set);
+    //获取目录
+    this.getmenu();
   },
   mounted() {
     //设置上拉刷新父容器高度
@@ -102,7 +117,6 @@ export default {
   methods: {
     loadTop() {
       //下拉刷新
-      console.log(2);
       this.$refs.loadmore.onTopLoaded();
     },
     loadBottom() {
@@ -112,9 +126,33 @@ export default {
       //this.allLoaded = true; // 若数据已全部获取完毕
       this.$refs.loadmore.onBottomLoaded();
     },
+    showmenu(){
+      this.ismenu=true;
+    },
+    hidemenu(e){
+      console.log(e.target)
+      if(e.target.nodeName=="DIV"){
+        this.ismenu=false;
+      }
+
+    },
+    menubook(i){
+      //通过目录跳转先清空
+      this.book=[];
+      this.getbook(i+1); 
+    },
+    getmenu(){
+      //获取目录
+      this.axios.get("/booktitles",{params:{
+        id:this.$route.params.id,
+      }}).then(res=>{
+        this.menu=res.data.titles.split("-")
+      })
+    },
     getbook(id) {
       //获取书籍内容
       var id = id || 1;
+      //console.log(id);
       this.axios
         .get("/book", {
           params: {
@@ -123,7 +161,9 @@ export default {
           }
         })
         .then(res => {
-          this.book.push(res.data)
+          this.book.push(res.data);
+          this.id=id;
+          this.ismenu=false;
         });
     },
     tab() {
@@ -135,7 +175,7 @@ export default {
         this.$store.commit("setshowtab", false);
       } else {
         //日间模式
-        console.log(this.set)
+        //console.log(this.set)
         this.$store.commit("settextcolor", "#33373d");
         //将背景切换为用户之前设置的背景
         this.$store.commit("setbgid", this.set.bid);
@@ -152,6 +192,11 @@ export default {
         var active = [];
         active[id] = "bg-active";
         this.$store.commit("setactive", active);
+        //变为日间
+        this.$store.commit("settextcolor", "#33373d");
+        this.$store.commit("setbgid", this.set.bid);
+        this.$store.commit("settabtext", "夜间");
+        this.$store.commit("setshowtab", true);
       }
     },
     setfont(i) {
@@ -226,6 +271,48 @@ export default {
   justify-content: space-between;
   margin: 0 0.5rem;
   padding: 1rem 0;
+}
+/*目录面板*/
+.read-menu{
+  position: fixed;
+  top:0;
+  right:-100%;
+  height: 100%;
+  z-index: 99;
+  background: rgba(0, 0, 0, 0.25);
+  width:100%;
+  display: flex;
+  justify-content:flex-end;
+  transition: all .5s;
+}
+.read .menu-active{
+  right: 0;
+}
+.read-menu .menu-body{
+  width:85%;
+  background: #fff;
+}
+.menu-title{
+  width:100%;
+  height:2.3rem;
+  line-height: 2.3rem;
+  letter-spacing: 2rem;
+  color:#ed424b;
+  border-bottom: 1px solid #ed424b;
+}
+.menu-list{
+  height:100%;
+  overflow-y:scroll; 
+}
+.read-menu .menu-body .menu-item{
+  display: flex;
+  color:#000;
+  justify-content: space-between;
+  box-sizing: border-box;
+  padding: 0 .7rem;
+  height:2.3rem;
+  line-height: 2.3rem;
+  border-bottom: 1px solid #eaeaea;
 }
 /*重置mintui样式*/
 .read >>> .mt-range-thumb {
