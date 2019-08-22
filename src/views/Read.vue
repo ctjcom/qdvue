@@ -49,12 +49,11 @@
       </div>
       <div class="foot-bar">
         <a href="javascript:;">
-          <span class="iconfont icon-gengduo
-"></span>
+          <span class="iconfont icon-mulu"></span>
           <h3>目录</h3>
         </a>
         <a href="javascript:;">
-          <span>2</span>
+          <span class="iconfont icon-jindu-"></span>
           <h3>进度</h3>
         </a>
         <a href="javascript:;" @click="isset=!isset">
@@ -62,7 +61,8 @@
           <h3>设置</h3>
         </a>
         <a href="javascript:;" @click="tab">
-          <span>4</span>
+          <span class="iconfont icon-icon-test" v-show="set.showtab"></span>
+          <span class="iconfont icon-session_evning" v-show="!set.showtab"></span>
           <h3>{{set.tabtext}}</h3>
         </a>
       </div>
@@ -90,14 +90,12 @@ export default {
   },
   created() {
     //初始化设置参数
-    var set = JSON.parse(localStorage.set);
-    this.$store.commit("setset", set);
     this.set = this.$store.getters.getset;
     this.getbook(this.id);
+    console.log("1:"+this.set);
   },
   mounted() {
     //设置上拉刷新父容器高度
-    
     this.wrapperHeight =
       document.documentElement.clientHeight
   },
@@ -137,6 +135,7 @@ export default {
         this.$store.commit("setshowtab", false);
       } else {
         //日间模式
+        console.log(this.set)
         this.$store.commit("settextcolor", "#33373d");
         //将背景切换为用户之前设置的背景
         this.$store.commit("setbgid", this.set.bid);

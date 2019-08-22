@@ -1,9 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
-
 Vue.use(Vuex)
-
 export default new Vuex.Store({
   state: {
     set:{//保存设置对象
@@ -17,37 +15,39 @@ export default new Vuex.Store({
     }
   },
   mutations: {
+    //更新设置信息
     setset(state,set){
         state.set=set;
+        localStorage.setItem("set",JSON.stringify(state.set))
     },
     setbid(state,bid){
       state.set.bid=bid;
-      //将设置信息保存在本地中 
-      localStorage.set=JSON.stringify(state.set);
+       //将设置信息保存在本地中 
+      localStorage.setItem("set",JSON.stringify(state.set))
     },
     setshowtab(state,showtab){
       state.set.showtab=showtab;
-      localStorage.set=JSON.stringify(state.set);
+      localStorage.setItem("set",JSON.stringify(state.set))
     },
     setrangeValue(state,rangeValue){
       state.set.rangeValue=rangeValue;
-      localStorage.set=JSON.stringify(state.set);
+      localStorage.setItem("set",JSON.stringify(state.set))
     },
     setbgid(state,bgid){
       state.set.bgid=bgid;
-      localStorage.set=JSON.stringify(state.set);
+      localStorage.setItem("set",JSON.stringify(state.set))
     },
     settextcolor(state,textcolor){
       state.set.textcolor=textcolor;
-      localStorage.set=JSON.stringify(state.set);
+      localStorage.setItem("set",JSON.stringify(state.set))
     },
     settabtext(state,tabtext){
       state.set.tabtext=tabtext;
-      localStorage.set=JSON.stringify(state.set);
+      localStorage.setItem("set",JSON.stringify(state.set))
     },
     setactive(state,active){
       state.set.active=active;
-      localStorage.set=JSON.stringify(state.set);
+      localStorage.setItem("set",JSON.stringify(state.set))
     },
   },
   getters:{

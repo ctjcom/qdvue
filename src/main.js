@@ -17,11 +17,20 @@ axios.defaults.baseURL="http://127.0.0.1:8080";
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 Vue.prototype.axios=axios;
 
-//初始化Vuex中的数据
+
+
 Vue.config.productionTip = false
 
 new Vue({
   router,
   store,
-  render: h => h(App)
+  render: h => h(App),
+  created() {
+    //初始化Vuex中的数据
+    var set=JSON.parse(localStorage.getItem("set"))
+    if(set!==null){
+      console.log(set);
+      this.$store.commit("setset",set);
+  }
+  },
 }).$mount('#app')
