@@ -117,6 +117,15 @@ export default {
   methods: {
     loadTop() {
       //下拉刷新
+      if(this.id>1){
+        this.id-=1;
+        this.getbook(this.id);
+        //取出最后一个
+        var book=this.book.pop()
+        //console.log(book)
+        //添加到开头
+        this.book.unshift(book)
+      }
       this.$refs.loadmore.onTopLoaded();
     },
     loadBottom() {
